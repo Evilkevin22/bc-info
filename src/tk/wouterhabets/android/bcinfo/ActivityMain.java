@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class ActivityMain extends Activity {
-
+	
+	private String currentLevel;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
