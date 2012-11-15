@@ -1,25 +1,25 @@
 package tk.wouterhabets.android.bcinfo;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
-public class ActivityMain extends Activity {
+import com.actionbarsherlock.app.SherlockActivity;
 
-	private String currentLevel;
+public class ActivityMain extends SherlockActivity {
+	
 	private final static String NET_URL = "http://www.wouterhabets.tk";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		startWebView();
+		
+		setWebView();
 	}
 
-	private void startWebView() {
-		WebView webview = new WebView(this);
-		setContentView(webview);
+	private void setWebView() {
+		WebView webview = (WebView) findViewById(R.id.webView1);
 		webview.loadUrl(NET_URL);
 	}
+		
 }
