@@ -1,0 +1,10 @@
+0	Alle meldingen
+1	Havo 2
+2	Havo 3
+3	Havo Bovenbouw
+4	Atheneum 2
+5	Atheneum 3
+6	Atheneum Bovenbouw
+7	Gymnasium 2
+8	Gymnasium 3
+9	Gymnasium Bovenbouw
