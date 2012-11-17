@@ -1,7 +1,7 @@
 package tk.wouterhabets.android.bcinfo;
 
 import android.os.Bundle;
-import android.webkit.WebView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -10,14 +10,18 @@ import com.actionbarsherlock.view.MenuItem;
 
 public class ActivityMain extends SherlockActivity {
 	
-	private final static String NET_URL = "http://www.wouterhabets.tk";
+	private final static String NET_URL = "http://example.com";
+	
+	TextView tvTitle, tvSummary;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		setWebView();
+		tvTitle = (TextView) findViewById(R.id.layout_main_level);
+		tvSummary = (TextView) findViewById(R.id.layout_main_text);
+		
 	}
 
 	@Override
@@ -44,11 +48,6 @@ public class ActivityMain extends SherlockActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void setWebView() {
-		WebView webview = (WebView) findViewById(R.id.webView1);
-		webview.loadUrl(NET_URL);
-	}
-	
 	private void refresh() {
 		
 	}

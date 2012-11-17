@@ -4,5 +4,6 @@
     <string name="menu_main_refresh">Vernieuwen</string>
     <string name="menu_main_about">Over</string>
     <string name="menu_main_settings">Instellingen</string>
+    <string name="hello_world">Voorbeeld tekst</string>
 
 </resources>
