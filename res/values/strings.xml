@@ -3,5 +3,6 @@
     <string name="app_name">BC Info</string>
     <string name="menu_main_refresh">Vernieuwen</string>
     <string name="menu_main_about">Over</string>
+    <string name="menu_main_settings">Instellingen</string>
 
 </resources>

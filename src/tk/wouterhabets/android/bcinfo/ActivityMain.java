@@ -33,6 +33,8 @@ public class ActivityMain extends SherlockActivity {
 		case R.id.menu_main_refresh_item:
 			refresh();
 			break;
+		case R.id.menu_main_settings_item:
+			break;
 		case R.id.menu_main_about_item:
 			break;
 		case android.R.id.home:

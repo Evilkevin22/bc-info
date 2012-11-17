@@ -5,9 +5,11 @@
         android:id="@+id/menu_main_refresh_item"
         android:title="@string/menu_main_refresh">
     </item>
-    <item
+    <item android:id="@+id/menu_main_settings_item" android:title="@string/menu_main_settings">
+    </item><item
         android:id="@+id/menu_main_about_item"
         android:title="@string/menu_main_about">
     </item>
+    
 
 </menu>
