@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner1">
+        <item >Alle meldingen</item>
+        <item >Havo 2</item>
+        <item >Havo 3</item>
+        <item >Havo Bovenbouw</item>
+        <item >Atheneum 2</item>
+        <item >Atheneum 3</item>
+        <item >Atheneum Bovenbouw</item>
+        <item >Gymnasium 2</item>
+        <item >Gymnasium 3</item>
+        <item >Gymnasium Bovenbouw</item>
+    </string-array>
+    
+</resources>

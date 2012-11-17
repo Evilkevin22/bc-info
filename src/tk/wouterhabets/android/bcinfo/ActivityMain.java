@@ -1,7 +1,10 @@
 package tk.wouterhabets.android.bcinfo;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -12,6 +15,9 @@ import com.actionbarsherlock.view.MenuItem;
 public class ActivityMain extends SherlockActivity {
 
 	private int currentLevel;
+	private final static String MENU_REFRESH = "Vernieuwen";
+	private final static String MENU_SETTINGS = "Instellingen";
+	private final static String MENU_ABOUT = "Over";
 
 	TextView tvTitle, tvSummary;
 
@@ -19,14 +25,29 @@ public class ActivityMain extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setTitle(R.string.title_uitval);
 		actionbar.setSubtitle(getSubtitle());
-		
+		actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		SpinnerAdapter mSpinnerAdapter = ArrayAdapter
+				.createFromResource(this, R.array.spinner1,
+						android.R.layout.simple_spinner_dropdown_item);
+		actionbar.setListNavigationCallbacks(mSpinnerAdapter,
+				new ActionBar.OnNavigationListener() {
+
+					@Override
+					public boolean onNavigationItemSelected(int itemPosition,
+							long itemId) {
+						// PLACEHOLDER
+						Toast.makeText(getApplicationContext(), itemPosition,
+								Toast.LENGTH_SHORT).show();
+						return false;
+					}
+				});
+
 		tvTitle = (TextView) findViewById(R.id.layout_main_level);
 		tvSummary = (TextView) findViewById(R.id.layout_main_text);
-		
 	}
 
 	@Override
@@ -41,10 +62,16 @@ public class ActivityMain extends SherlockActivity {
 		switch (item.getItemId()) {
 		case R.id.menu_main_refresh_item:
 			refresh(currentLevel);
+			Toast.makeText(getApplicationContext(), MENU_REFRESH,
+					Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.menu_main_settings_item:
+			Toast.makeText(getApplicationContext(), MENU_SETTINGS,
+					Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.menu_main_about_item:
+			Toast.makeText(getApplicationContext(), MENU_ABOUT,
+					Toast.LENGTH_SHORT).show();
 			break;
 		case android.R.id.home:
 			// Code voor app icoon button hier invullen
@@ -82,7 +109,5 @@ public class ActivityMain extends SherlockActivity {
 		default:
 			return R.string.hello_world;
 		}
-
 	}
-
 }
