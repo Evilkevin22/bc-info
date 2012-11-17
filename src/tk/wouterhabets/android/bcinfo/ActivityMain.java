@@ -10,7 +10,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 public class ActivityMain extends SherlockActivity {
 	
-	private final static String NET_URL = "http://example.com";
+	private int currentLevel;
 	
 	TextView tvTitle, tvSummary;
 
@@ -35,7 +35,7 @@ public class ActivityMain extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_main_refresh_item:
-			refresh();
+			refresh(currentLevel);
 			break;
 		case R.id.menu_main_settings_item:
 			break;
@@ -48,7 +48,7 @@ public class ActivityMain extends SherlockActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void refresh() {
+	private void refresh(int level) {
 		
 	}
 		
