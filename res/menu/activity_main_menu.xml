@@ -8,12 +8,10 @@
     </item>
     <item
         android:id="@+id/menu_main_settings_item"
-        android:showAsAction="ifRoom"
         android:title="@string/menu_main_settings">
     </item>
     <item
         android:id="@+id/menu_main_about_item"
-        android:showAsAction="ifRoom"
         android:title="@string/menu_main_about">
     </item>
 

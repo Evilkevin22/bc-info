@@ -3,21 +3,26 @@ package tk.wouterhabets.android.bcinfo;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 public class ActivityMain extends SherlockActivity {
-	
+
 	private int currentLevel;
-	
+
 	TextView tvTitle, tvSummary;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		ActionBar actionbar = getSupportActionBar();
+		actionbar.setTitle(R.string.title_uitval);
+		actionbar.setSubtitle(getSubtitle());
 		
 		tvTitle = (TextView) findViewById(R.id.layout_main_level);
 		tvSummary = (TextView) findViewById(R.id.layout_main_text);
@@ -49,7 +54,35 @@ public class ActivityMain extends SherlockActivity {
 	}
 
 	private void refresh(int level) {
-		
+
 	}
-		
+
+	private int getSubtitle() {
+		switch (currentLevel) {
+		case 0:
+			return R.string.level_0;
+		case 1:
+			return R.string.level_1;
+		case 2:
+			return R.string.level_2;
+		case 3:
+			return R.string.level_3;
+		case 4:
+			return R.string.level_4;
+		case 5:
+			return R.string.level_5;
+		case 6:
+			return R.string.level_6;
+		case 7:
+			return R.string.level_7;
+		case 8:
+			return R.string.level_8;
+		case 9:
+			return R.string.level_9;
+		default:
+			return R.string.hello_world;
+		}
+
+	}
+
 }
