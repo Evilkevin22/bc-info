@@ -1,5 +1,6 @@
 package tk.wouterhabets.android.bcinfo;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -18,7 +19,7 @@ public class ActivityMain extends SherlockActivity {
 	private int currentLevel;
 	private final static String MENU_ABOUT = "BC info. Gemaakt door Wouter, Kevin, Rick, Justin en Tom.";
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
-	
+
 	private int troll;
 
 	TextView tvTitle, tvSummary;
@@ -86,8 +87,9 @@ public class ActivityMain extends SherlockActivity {
 			// settings item
 			break;
 		case R.id.menu_main_about_item:
-			Toast.makeText(getApplicationContext(), MENU_ABOUT,
-					Toast.LENGTH_LONG).show();
+			Intent mIntent = new Intent(
+					"tk.wouterhabets.android.bcinfo.ACTIVITYABOUT");
+			startActivity(mIntent);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -106,7 +108,8 @@ public class ActivityMain extends SherlockActivity {
 		if (troll < 20) {
 			troll++;
 		} else {
-			Toast.makeText(getApplicationContext(), "Je moeder", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Je moeder",
+					Toast.LENGTH_LONG).show();
 			troll = 0;
 		}
 	}
