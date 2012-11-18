@@ -36,7 +36,6 @@ public class ActivityMain extends SherlockActivity {
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter
 				.createFromResource(this, R.array.spinner1,
 						android.R.layout.simple_spinner_dropdown_item);
-		actionbar.setSelectedNavigationItem(getLevel());
 		actionbar.setListNavigationCallbacks(mSpinnerAdapter,
 				new ActionBar.OnNavigationListener() {
 
@@ -49,6 +48,7 @@ public class ActivityMain extends SherlockActivity {
 						return false;
 					}
 				});
+		actionbar.setSelectedNavigationItem(getLevel());
 
 		// 2 textviews van layout_main.xml inladen
 		tvTitle = (TextView) findViewById(R.id.layout_main_level);
