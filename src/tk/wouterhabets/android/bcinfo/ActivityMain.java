@@ -39,9 +39,6 @@ public class ActivityMain extends SherlockActivity {
 					@Override
 					public boolean onNavigationItemSelected(int itemPosition,
 							long itemId) {
-						// PLACEHOLDER
-						Toast.makeText(getApplicationContext(), itemPosition,
-								Toast.LENGTH_SHORT).show();
 						return false;
 					}
 				});
