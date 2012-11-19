@@ -17,7 +17,6 @@ import com.actionbarsherlock.view.MenuItem;
 public class ActivityMain extends SherlockActivity {
 
 	private int currentLevel;
-	private final static String MENU_ABOUT = "BC info. Gemaakt door Wouter, Kevin, Rick, Justin en Tom.";
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
 
 	private int troll;

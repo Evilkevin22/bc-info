@@ -16,5 +16,7 @@
     <string name="level_8">Gymnasium 3</string>
     <string name="level_9">Gymnasium Bovenbouw</string>
     <string name="title_uitval">Uitval</string>
+    <string name="about_title">Over BC Info</string>
+    <string name="about_text">BC Info. Gemaakt door Wouter, Kevin, Rick, Justin en Tom.</string>
 
 </resources>
