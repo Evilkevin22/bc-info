@@ -1,11 +1,18 @@
 package tk.wouterhabets.android.bcinfo;
 
+import java.net.URL;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -20,9 +27,7 @@ public class ActivityMain extends SherlockActivity {
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
 
 	private int troll;
-
-	TextView tvTitle, tvSummary;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,10 +56,6 @@ public class ActivityMain extends SherlockActivity {
 					}
 				});
 		actionbar.setSelectedNavigationItem(getLevel());
-
-		// 2 textviews van layout_main.xml inladen
-		tvTitle = (TextView) findViewById(R.id.layout_main_level);
-		tvSummary = (TextView) findViewById(R.id.layout_main_text);
 	}
 
 	@Override
@@ -83,7 +84,8 @@ public class ActivityMain extends SherlockActivity {
 			refresh(currentLevel);
 			break;
 		case R.id.menu_main_settings_item:
-			Intent mIntentSettings = new Intent("tk.wouterhabets.android.bcinfo.PREFERENCESMAIN");
+			Intent mIntentSettings = new Intent(
+					"tk.wouterhabets.android.bcinfo.PREFERENCESMAIN");
 			startActivity(mIntentSettings);
 			break;
 		case R.id.menu_main_about_item:
@@ -112,6 +114,12 @@ public class ActivityMain extends SherlockActivity {
 					Toast.LENGTH_LONG).show();
 			troll = 0;
 		}
+		
+		// SAXParserFactory spf = SAXParserFactory.newInstance();
+		// SAXParser sp = spf.newSAXParser();
+		// XMLReader xr = sp.getXMLReader();
+		// xr.setContentHandler(new RSSHandler());
+		// xr.parse(new InputSource(url2.openStream()));
 	}
 
 }
