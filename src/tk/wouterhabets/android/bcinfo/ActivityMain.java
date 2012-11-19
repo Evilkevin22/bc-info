@@ -83,12 +83,14 @@ public class ActivityMain extends SherlockActivity {
 			refresh(currentLevel);
 			break;
 		case R.id.menu_main_settings_item:
-			// settings item
+			// TODO nog invullen
+			Intent mIntentSettings = new Intent();
+			startActivity(mIntentSettings);
 			break;
 		case R.id.menu_main_about_item:
-			Intent mIntent = new Intent(
+			Intent mIntentAbout = new Intent(
 					"tk.wouterhabets.android.bcinfo.ACTIVITYABOUT");
-			startActivity(mIntent);
+			startActivity(mIntentAbout);
 			break;
 		}
 		return super.onOptionsItemSelected(item);

@@ -4,7 +4,7 @@
     <string name="menu_main_refresh">Vernieuwen</string>
     <string name="menu_main_about">Over</string>
     <string name="menu_main_settings">Instellingen</string>
-    <string name="hello_world">Voorbeeld tekst</string>
+    <string name="hello_world">App</string>
     <string name="level_0">Alle meldingen</string>
     <string name="level_1">Havo 2</string>
     <string name="level_2">Havo 3</string>
@@ -18,5 +18,8 @@
     <string name="title_uitval">Uitval</string>
     <string name="about_title">Over BC Info</string>
     <string name="about_text">BC Info. Gemaakt door Wouter, Kevin, Rick, Justin en Tom.</string>
+    <string name="settings_notificationstate">Notificaties</string>
+    <string name="settings_notificationstate_summary">Schakel notificaties in</string>
+    <string name="settings_notifications">Notificaties</string>
 
 </resources>
