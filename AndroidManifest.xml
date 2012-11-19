@@ -19,10 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="ActivityAbout" >
             <intent-filter>
                 <action android:name="tk.wouterhabets.android.bcinfo.ACTIVITYABOUT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="PreferencesMain" >
+            <intent-filter>
+                <action android:name="tk.wouterhabets.android.bcinfo.PREFERENCESMAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
