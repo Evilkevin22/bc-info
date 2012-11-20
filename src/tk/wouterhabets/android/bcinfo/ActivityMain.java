@@ -1,11 +1,14 @@
 package tk.wouterhabets.android.bcinfo;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.content.Intent;
@@ -13,6 +16,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -25,9 +29,9 @@ public class ActivityMain extends SherlockActivity {
 
 	private int currentLevel;
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
-
+	private final static String netURL = "http://wouterhabets.tk/rssext.xml";
 	private int troll;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -114,12 +118,36 @@ public class ActivityMain extends SherlockActivity {
 					Toast.LENGTH_LONG).show();
 			troll = 0;
 		}
-		
-		// SAXParserFactory spf = SAXParserFactory.newInstance();
-		// SAXParser sp = spf.newSAXParser();
-		// XMLReader xr = sp.getXMLReader();
-		// xr.setContentHandler(new RSSHandler());
-		// xr.parse(new InputSource(url2.openStream()));
+
+		try {
+			// 
+			URL url1 = new URL("http://86.94.58.174/rssext.xml");
+			SAXParserFactory spf = SAXParserFactory.newInstance();
+			SAXParser sp;
+			sp = spf.newSAXParser();
+			XMLReader xr;
+			xr = sp.getXMLReader();
+			xr.setContentHandler(new RSSHandler());
+
+			// InputSource ic = new InputSource(url1.openStream());
+			// xr.parse(ic);
+
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+			TextView tv = (TextView) findViewById(R.id.textView2);
+			tv.setText("ParserConfigurationException");
+		} catch (SAXException e) {
+			e.printStackTrace();
+			TextView tv = (TextView) findViewById(R.id.textView2);
+			tv.setText("SAXException");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			TextView tv = (TextView) findViewById(R.id.textView2);
+			tv.setText("MalformedURLException");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
