@@ -1,5 +1,6 @@
 package tk.wouterhabets.android.bcinfo;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -7,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
@@ -106,33 +108,41 @@ public class ActivityMain extends SherlockActivity {
 	}
 
 	private void refresh(int level) {
+		Thread refreshThread = new Thread() {
+			public void run() {
+				try {
+					// 
+					URL url1 = new URL("http://86.94.58.174/rssext.xml");
+					SAXParserFactory spf = SAXParserFactory.newInstance();
+					SAXParser sp;
+					sp = spf.newSAXParser();
+					XMLReader xr;
+					xr = sp.getXMLReader();
+					xr.setContentHandler(new RSSHandler());
+
+					InputSource ic = new InputSource(url1.openStream());
+					// xr.parse(ic);
+
+				} catch (ParserConfigurationException e) {
+					e.printStackTrace();
+					TextView tv = (TextView) findViewById(R.id.textView2);
+					tv.setText("ParserConfigurationException");
+				} catch (SAXException e) {
+					e.printStackTrace();
+					TextView tv = (TextView) findViewById(R.id.textView2);
+					tv.setText("SAXException");
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+					TextView tv = (TextView) findViewById(R.id.textView2);
+					tv.setText("MalformedURLException");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			}
+		};
+		refreshThread.start();
 		
-		try {
-			// 
-			URL url1 = new URL("http://86.94.58.174/rssext.xml");
-			SAXParserFactory spf = SAXParserFactory.newInstance();
-			SAXParser sp;
-			sp = spf.newSAXParser();
-			XMLReader xr;
-			xr = sp.getXMLReader();
-			xr.setContentHandler(new RSSHandler());
-
-			// InputSource ic = new InputSource(url1.openStream());
-			// xr.parse(ic);
-
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-			TextView tv = (TextView) findViewById(R.id.textView2);
-			tv.setText("ParserConfigurationException");
-		} catch (SAXException e) {
-			e.printStackTrace();
-			TextView tv = (TextView) findViewById(R.id.textView2);
-			tv.setText("SAXException");
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			TextView tv = (TextView) findViewById(R.id.textView2);
-			tv.setText("MalformedURLException");
-		} 
 	}
 
 }

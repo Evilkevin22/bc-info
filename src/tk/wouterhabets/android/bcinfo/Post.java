@@ -3,7 +3,6 @@ package tk.wouterhabets.android.bcinfo;
 public class Post {
 
 	private String title;
-	private String thumbnail;
 	private String url;
 	private String description;
 	private String pubDate;
@@ -14,14 +13,6 @@ public class Post {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
 	}
 
 	public String getUrl() {
