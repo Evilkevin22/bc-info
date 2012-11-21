@@ -121,7 +121,7 @@ public class ActivityMain extends SherlockActivity {
 					xr.setContentHandler(new RSSHandler());
 
 					InputSource ic = new InputSource(url1.openStream());
-					// xr.parse(ic);
+					xr.parse(ic);
 
 				} catch (ParserConfigurationException e) {
 					e.printStackTrace();
