@@ -1,6 +1,5 @@
 package tk.wouterhabets.android.bcinfo;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -29,8 +27,6 @@ public class ActivityMain extends SherlockActivity {
 
 	private int currentLevel;
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
-	private final static String netURL = "http://wouterhabets.tk/rssext.xml";
-	private int troll;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,15 +106,7 @@ public class ActivityMain extends SherlockActivity {
 	}
 
 	private void refresh(int level) {
-		// placeholder voor vernieuwen
-		if (troll < 20) {
-			troll++;
-		} else {
-			Toast.makeText(getApplicationContext(), "Je moeder",
-					Toast.LENGTH_LONG).show();
-			troll = 0;
-		}
-
+		
 		try {
 			// 
 			URL url1 = new URL("http://86.94.58.174/rssext.xml");
@@ -144,10 +132,7 @@ public class ActivityMain extends SherlockActivity {
 			e.printStackTrace();
 			TextView tv = (TextView) findViewById(R.id.textView2);
 			tv.setText("MalformedURLException");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		} 
 	}
 
 }
