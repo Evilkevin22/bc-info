@@ -111,7 +111,6 @@ public class ActivityMain extends SherlockActivity {
 		Thread refreshThread = new Thread() {
 			public void run() {
 				try {
-					// 
 					URL url1 = new URL("http://86.94.58.174/rssext.xml");
 					SAXParserFactory spf = SAXParserFactory.newInstance();
 					SAXParser sp;
@@ -136,8 +135,9 @@ public class ActivityMain extends SherlockActivity {
 					TextView tv = (TextView) findViewById(R.id.textView2);
 					tv.setText("MalformedURLException");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+					TextView tv = (TextView) findViewById(R.id.textView2);
+					tv.setText("MalformedURLException");
 				} 
 			}
 		};
