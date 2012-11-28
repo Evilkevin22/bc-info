@@ -17,7 +17,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -124,24 +123,18 @@ public class ActivityMain extends SherlockActivity {
 
 				} catch (ParserConfigurationException e) {
 					e.printStackTrace();
-					TextView tv = (TextView) findViewById(R.id.textView2);
-					tv.setText("ParserConfigurationException");
 				} catch (SAXException e) {
 					e.printStackTrace();
-					TextView tv = (TextView) findViewById(R.id.textView2);
-					tv.setText("SAXException");
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
-					TextView tv = (TextView) findViewById(R.id.textView2);
-					tv.setText("MalformedURLException");
 				} catch (IOException e) {
 					e.printStackTrace();
-					TextView tv = (TextView) findViewById(R.id.textView2);
-					tv.setText("MalformedURLException");
 				} 
+				
 			}
 		};
 		refreshThread.start();
+		
 		
 	}
 

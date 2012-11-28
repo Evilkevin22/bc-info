@@ -4,6 +4,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import android.content.SharedPreferences;
+
 public class RSSHandler extends DefaultHandler {
 
 	private Post currentPost = new Post();
@@ -33,8 +35,7 @@ public class RSSHandler extends DefaultHandler {
 			currentPost.setPubDate(chars.toString());
 
 		}
-		if (localName.equalsIgnoreCase("link")
-				&& currentPost.getUrl() == null) {
+		if (localName.equalsIgnoreCase("link") && currentPost.getUrl() == null) {
 			currentPost.setUrl(chars.toString());
 		}
 
