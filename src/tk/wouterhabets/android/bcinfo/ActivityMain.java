@@ -17,6 +17,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -32,6 +33,8 @@ public class ActivityMain extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		//xml interface laden
 		setContentView(R.layout.activity_main);
 
 		// currentLevel uit de SharedPreferences halen
@@ -107,10 +110,12 @@ public class ActivityMain extends SherlockActivity {
 	}
 
 	private void refresh(int level) {
+		
+		//refresh thread, zorgt voor het ophalen van de uitval
 		Thread refreshThread = new Thread() {
 			public void run() {
 				try {
-					URL url1 = new URL("http://86.94.58.174/rssext.xml");
+					URL url1 = new URL("http://wouterhabets.tk/bcinfo.xml");
 					SAXParserFactory spf = SAXParserFactory.newInstance();
 					SAXParser sp;
 					sp = spf.newSAXParser();
@@ -119,7 +124,8 @@ public class ActivityMain extends SherlockActivity {
 					xr.setContentHandler(new RSSHandler());
 
 					InputSource ic = new InputSource(url1.openStream());
-					xr.parse(ic);
+					//xr.parse(ic);
+					
 
 				} catch (ParserConfigurationException e) {
 					e.printStackTrace();

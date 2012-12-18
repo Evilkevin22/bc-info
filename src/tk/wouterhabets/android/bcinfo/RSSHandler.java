@@ -30,13 +30,11 @@ public class RSSHandler extends DefaultHandler {
 			currentPost.setTitle(chars.toString());
 
 		}
-		if (localName.equalsIgnoreCase("pubDate")
-				&& currentPost.getPubDate() == null) {
-			currentPost.setPubDate(chars.toString());
+		
+		if (localName.equalsIgnoreCase("description")
+				&& currentPost.getTitle() == null) {
+			currentPost.setTitle(chars.toString());
 
-		}
-		if (localName.equalsIgnoreCase("link") && currentPost.getUrl() == null) {
-			currentPost.setUrl(chars.toString());
 		}
 
 		if (localName.equalsIgnoreCase("item")) {
