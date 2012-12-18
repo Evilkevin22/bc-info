@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:np="http://netpresenter.com/#">
+  <channel>
+    <title>Leerlingen</title>
+    <link>http://www.netpresenter.com</link>
+    <description>Netpresenter Message Server Channel</description>
+    <atom:link href="http://fenris/netpresenter/published/leerlingen/rss/rssext.xml" rel="self" type="application/rss+xml" />
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>les mevr. Backhuijs</title>
+        <description>Donderdag 5e A6 322  7e en 8e uur A5 322&lt;br&gt;&lt;br&gt;vrijdag 5e A5 322 6e A4 322 7e en 8e A6 322</description>
+        <guid isPermaLink="false">561-1352364292</guid>
+        <np:msgid>561-1352364292</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>Studie en verwijderden</title>
+        <description>STUDIEHUIS</description>
+        <guid isPermaLink="false">552-1352188927</guid>
+        <np:msgid>552-1352188927</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>Havo 2</title>
+        <description>*MAANDAG 12 NOVEMBER&lt;br&gt;3e uur H24 dhr. M&uuml;ller studie in Grote Studio&lt;br&gt;4e uur H21 dhr. M&uuml;ller studie in Grote Studio&lt;br&gt;&lt;br&gt;*DINSDAG 13 NOVEMBER&lt;br&gt;7e uur H21 dhr. Bartelom&eacute;e geen les</description>
+        <guid isPermaLink="false">307-1352717243</guid>
+        <np:msgid>307-1352717243</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>Havo 3</title>
+        <description>*MAANDAG 12 NOVEMBER&lt;br&gt;2e uur H33 studie in lok.359</description>
+        <guid isPermaLink="false">308-1352704220</guid>
+        <np:msgid>308-1352704220</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>Havo BOVENBOUW</title>
+        <description>*MAANDAG 12 NOVEMBER &lt;br&gt;LOKAALWIJZIGING 6e uur H4 WIKN 143&lt;br&gt;*DINSDAG 13 NOVEMBER &lt;br&gt;LOKAALWIJZIGING 4e uur H4 WIKN 143&lt;br&gt;3e uur H44 dhr. Bik geen les</description>
+        <guid isPermaLink="false">10-1352717106</guid>
+        <np:msgid>10-1352717106</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>Atheneum 2</title>
+        <description>*MAANDAG 12 NOVEMBER&lt;br&gt;5e uur A22 dhr. Bartholom&eacute;e studie in Grote Studio</description>
+        <guid isPermaLink="false">309-1352709072</guid>
+        <np:msgid>309-1352709072</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>Atheneum BOVENBOUW</title>
+        <description>*DINSDAG 13 NOVEMBER &lt;br&gt;LOKAALWIJZIGING 5e uur A5 WIKN 143&lt;br&gt;1e uur A52 dhr. Bik geen les&lt;br&gt;4e uur A42 dhr. Bik geen les&lt;br&gt;5e uur A43 dhr. Bik geen les&lt;br&gt;6e uur A44 dhr. Bik geen les&lt;br&gt;7e uur A53 dhr. Bik geen les</description>
+        <guid isPermaLink="false">12-1352717070</guid>
+        <np:msgid>12-1352717070</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>Gymnasium 2</title>
+        <description>*MAANDAG 12 NOVEMBER&lt;br&gt;5e uur G22 dhr. M&uuml;ller studie in lok. 317&lt;br&gt;&lt;br&gt;*DINSDAG 13 NOVEMBER&lt;br&gt;1e uur G23 dhr. Bartelom&eacute;e geen les</description>
+        <guid isPermaLink="false">311-1352717179</guid>
+        <np:msgid>311-1352717179</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+      <item>
+        <link>http://www.netpresenter.com</link>
+        <title>Gymnasium BOVENBOUW</title>
+        <description>*DINSDAG 13 NOVEMBER &lt;br&gt;LOKAALWIJZIGING 5e uur G5 WIKN 143</description>
+        <guid isPermaLink="false">14-1352704896</guid>
+        <np:msgid>14-1352704896</np:msgid>
+        <np:image />
+        <np:html />
+        <np:url />
+      </item>
+  </channel>
+</rss>
