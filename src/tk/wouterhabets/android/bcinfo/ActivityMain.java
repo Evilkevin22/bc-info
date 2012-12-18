@@ -15,6 +15,7 @@ import org.xml.sax.XMLReader;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -124,7 +125,9 @@ public class ActivityMain extends SherlockActivity {
 					xr.setContentHandler(new RSSHandler());
 
 					InputSource ic = new InputSource(url1.openStream());
-					//xr.parse(ic);
+					Log.i("ActivityMain", "URL stream geopend.");
+					Log.i("ActivityMain", "Parser starten...");
+					xr.parse(ic);
 					
 
 				} catch (ParserConfigurationException e) {

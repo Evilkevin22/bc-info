@@ -4,11 +4,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.content.SharedPreferences;
+import android.util.Log;
 
 public class RSSHandler extends DefaultHandler {
 
-	private Post currentPost = new Post();
 	StringBuffer chars = new StringBuffer();
 
 	@Override
@@ -25,21 +24,18 @@ public class RSSHandler extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
 
-		if (localName.equalsIgnoreCase("title")
-				&& currentPost.getTitle() == null) {
-			currentPost.setTitle(chars.toString());
+		if (localName.equalsIgnoreCase("title")) {
+			Log.i("RSSHandler", "Title gevonden: " + chars.toString());
 
 		}
-		
-		if (localName.equalsIgnoreCase("description")
-				&& currentPost.getTitle() == null) {
-			currentPost.setTitle(chars.toString());
+
+		if (localName.equalsIgnoreCase("description")) {
+			Log.i("RSSHandler", "Description gevonden: " + chars.toString());
 
 		}
 
 		if (localName.equalsIgnoreCase("item")) {
-			// PostList.add(currentPost);
-			currentPost = new Post();
+			// tekst in database invoegen
 		}
 
 	}
