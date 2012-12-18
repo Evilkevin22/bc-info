@@ -18,7 +18,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -117,16 +116,18 @@ public class ActivityMain extends SherlockActivity {
 			public void run() {
 				try {
 					URL url1 = new URL("http://wouterhabets.tk/bcinfo.xml");
+					Log.i("ActivityMain", "RSS feed downloaden van http://wouterhabets.tk/bcinfo.xml...");
+					InputSource ic = new InputSource(url1.openStream());
+					
+					
 					SAXParserFactory spf = SAXParserFactory.newInstance();
 					SAXParser sp;
 					sp = spf.newSAXParser();
 					XMLReader xr;
 					xr = sp.getXMLReader();
-					xr.setContentHandler(new RSSHandler());
-
-					InputSource ic = new InputSource(url1.openStream());
-					Log.i("ActivityMain", "URL stream geopend.");
-					Log.i("ActivityMain", "Parser starten...");
+					xr.setContentHandler(new RSSHandler());		
+					
+					Log.i("ActivityMain", "XMLReader starten...");
 					xr.parse(ic);
 					
 

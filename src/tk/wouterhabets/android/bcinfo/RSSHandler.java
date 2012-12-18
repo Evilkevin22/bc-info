@@ -35,7 +35,7 @@ public class RSSHandler extends DefaultHandler {
 		}
 
 		if (localName.equalsIgnoreCase("item")) {
-			// tekst in database invoegen
+			Log.i("RSSHandler", "Item gevonden.");
 		}
 
 	}
