@@ -16,26 +16,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.app.SlidingActivity;
 
-public class ActivityMain extends SherlockActivity {
+public class ActivityMain extends SlidingActivity {
 
 	private int currentLevel;
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		//xml interface laden
 		setContentView(R.layout.activity_main);
+		setBehindContentView(R.layout.activityslider_main);
 
 		// currentLevel uit de SharedPreferences halen
 		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0);
@@ -45,6 +45,17 @@ public class ActivityMain extends SherlockActivity {
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setTitle("Level: " + getLevel());
 		actionbar.setSubtitle("BC Info - Uitval");
+		
+		SlidingMenu menu = getSlidingMenu();
+		
+        menu.setMode(SlidingMenu.LEFT);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setShadowWidthRes(R.dimen.shadow_width);
+        menu.setShadowDrawable(R.drawable.schaduw);
+        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu.setFadeDegree(0.35f);
+        //menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        // menu.setMenu(R.layout.menu);
 		
 	}
 
