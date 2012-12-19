@@ -82,21 +82,17 @@ public class ActivityMain extends SherlockActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// controleert welk menu item is geselecteerd en voert code uit
-		switch (item.getItemId()) {
-		case R.id.menu_main_refresh_item:
+		int itemId = item.getItemId();
+		if (itemId == R.id.menu_main_refresh_item) {
 			refresh(currentLevel);
-			break;
-		case R.id.menu_main_settings_item:
+		} else if (itemId == R.id.menu_main_settings_item) {
 			Intent mIntentSettings = new Intent(
 					"tk.wouterhabets.android.bcinfo.PREFERENCESMAIN");
 			startActivity(mIntentSettings);
-			break;
-		case R.id.menu_main_about_item:
+		} else if (itemId == R.id.menu_main_about_item) {
 			Intent mIntentAbout = new Intent(
 					"tk.wouterhabets.android.bcinfo.ACTIVITYABOUT");
 			startActivity(mIntentAbout);
-			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
