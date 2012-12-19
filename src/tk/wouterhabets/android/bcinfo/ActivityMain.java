@@ -41,25 +41,11 @@ public class ActivityMain extends SherlockActivity {
 		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0);
 		setLevel(settings.getInt("currentLevel", 0));
 
-		// actionbar met spinner instellen
+		// actionbar instellen
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		SpinnerAdapter mSpinnerAdapter = ArrayAdapter
-				.createFromResource(this, R.array.spinner1,
-						android.R.layout.simple_spinner_dropdown_item);
-		actionbar.setListNavigationCallbacks(mSpinnerAdapter,
-				new ActionBar.OnNavigationListener() {
-
-					@Override
-					public boolean onNavigationItemSelected(int itemPosition,
-							long itemId) {
-						setLevel(itemPosition);
-						refresh(itemPosition);
-
-						return false;
-					}
-				});
-		actionbar.setSelectedNavigationItem(getLevel());
+		actionbar.setTitle("Level: " + getLevel());
+		actionbar.setSubtitle("BC Info - Uitval");
+		
 	}
 
 	@Override
@@ -82,17 +68,21 @@ public class ActivityMain extends SherlockActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		if (itemId == R.id.menu_main_refresh_item) {
+		// controleert welk menu item is geselecteerd en voert code uit
+		switch (item.getItemId()) {
+		case R.id.menu_main_refresh_item:
 			refresh(currentLevel);
-		} else if (itemId == R.id.menu_main_settings_item) {
+			break;
+		case R.id.menu_main_settings_item:
 			Intent mIntentSettings = new Intent(
 					"tk.wouterhabets.android.bcinfo.PREFERENCESMAIN");
 			startActivity(mIntentSettings);
-		} else if (itemId == R.id.menu_main_about_item) {
+			break;
+		case R.id.menu_main_about_item:
 			Intent mIntentAbout = new Intent(
 					"tk.wouterhabets.android.bcinfo.ACTIVITYABOUT");
 			startActivity(mIntentAbout);
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
