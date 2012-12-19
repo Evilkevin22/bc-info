@@ -23,5 +23,6 @@
     <string name="settings_notifications">Notificaties</string>
     <string name="sliderlayout_main_title">BC Info</string>
     <string name="sliderlayout_main_uitval">Uitval</string>
+    <string name="firstruntext">Swipe van links naar rechts voor de filter.</string>
 
 </resources>

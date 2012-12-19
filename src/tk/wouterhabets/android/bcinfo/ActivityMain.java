@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
@@ -50,6 +51,12 @@ public class ActivityMain extends SlidingActivity implements
 		// currentLevel uit de SharedPreferences halen
 		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0);
 		setLevel(settings.getInt("currentLevel", 0));
+		
+		// indien eerste keer gestart, help tekst weergeven
+		if(settings.getBoolean("firstRun", true)) {
+			TextView firstRunTextView = (TextView) findViewById(R.id.textView_firstrun);
+			firstRunTextView.setVisibility(View.VISIBLE);
+		}
 
 		// slidingmenu instellen
 		SlidingMenu menu = getSlidingMenu();
@@ -72,14 +79,17 @@ public class ActivityMain extends SlidingActivity implements
 			long id) {
 		setLevel(position);
 		refresh(position);
+		toggle();
 	}
 
 	@Override
 	protected void onStop() {
 		// currentLevel opslaan in SharedPreferences
+		// en dat de app al een keer is gestart
 		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt("currentLevel", getLevel());
+		editor.putBoolean("firstRun", false);
 		editor.commit();
 		super.onStop();
 	}
