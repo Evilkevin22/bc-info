@@ -21,5 +21,7 @@
     <string name="settings_notificationstate">Notificaties</string>
     <string name="settings_notificationstate_summary">Schakel notificaties in</string>
     <string name="settings_notifications">Notificaties</string>
+    <string name="sliderlayout_main_title">BC Info</string>
+    <string name="sliderlayout_main_uitval">Uitval</string>
 
 </resources>
