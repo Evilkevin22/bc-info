@@ -150,8 +150,8 @@ public class ActivityMain extends SlidingActivity implements
 					URL url1 = new URL("http://wouterhabets.tk/bcinfo.xml");
 					Log.i("ActivityMain",
 							"RSS feed downloaden van http://wouterhabets.tk/bcinfo.xml...");
-					InputSource ic = new InputSource(url1.openStream());
 
+					InputSource ic = new InputSource(url1.openStream());
 					SAXParserFactory spf = SAXParserFactory.newInstance();
 					SAXParser sp;
 					sp = spf.newSAXParser();
@@ -177,46 +177,45 @@ public class ActivityMain extends SlidingActivity implements
 		refreshThread.start();
 
 	}
+	
+	public class RSSHandler extends DefaultHandler {
 
-}
+		StringBuffer chars = new StringBuffer();
 
-class RSSHandler extends DefaultHandler {
+		@Override
+		public void startElement(String uri, String localName, String qName,
+				Attributes atts) {
 
-	StringBuffer chars = new StringBuffer();
+			chars = new StringBuffer();
+			if (localName.equalsIgnoreCase("item")) {
 
-	@Override
-	public void startElement(String uri, String localName, String qName,
-			Attributes atts) {
+			}
+		}
 
-		chars = new StringBuffer();
-		if (localName.equalsIgnoreCase("item")) {
+		@Override
+		public void endElement(String uri, String localName, String qName)
+				throws SAXException {
+
+			if (localName.equalsIgnoreCase("title")) {
+				Log.i("RSSHandler", "Title gevonden: " + chars.toString());
+
+			}
+
+			if (localName.equalsIgnoreCase("description")) {
+				Log.i("RSSHandler", "Description gevonden: " + chars.toString());
+
+			}
+
+			if (localName.equalsIgnoreCase("item")) {
+				Log.i("RSSHandler", "Item gevonden.");
+			}
 
 		}
+
+		@Override
+		public void characters(char ch[], int start, int length) {
+			chars.append(new String(ch, start, length));
+		}
+
 	}
-
-	@Override
-	public void endElement(String uri, String localName, String qName)
-			throws SAXException {
-
-		if (localName.equalsIgnoreCase("title")) {
-			Log.i("RSSHandler", "Title gevonden: " + chars.toString());
-
-		}
-
-		if (localName.equalsIgnoreCase("description")) {
-			Log.i("RSSHandler", "Description gevonden: " + chars.toString());
-
-		}
-
-		if (localName.equalsIgnoreCase("item")) {
-			Log.i("RSSHandler", "Item gevonden.");
-		}
-
-	}
-
-	@Override
-	public void characters(char ch[], int start, int length) {
-		chars.append(new String(ch, start, length));
-	}
-
 }
