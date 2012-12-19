@@ -47,6 +47,7 @@ public class ActivityMain extends SlidingActivity implements
 		// actionbar instellen
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setSubtitle("BC Info - Uitval");
+		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// currentLevel uit de SharedPreferences halen
 		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0);
@@ -118,6 +119,9 @@ public class ActivityMain extends SlidingActivity implements
 			Intent mIntentAbout = new Intent(
 					"tk.wouterhabets.android.bcinfo.ACTIVITYABOUT");
 			startActivity(mIntentAbout);
+			break;
+		case android.R.id.home:
+			toggle();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
