@@ -48,15 +48,16 @@ public class ActivityMain extends SlidingActivity implements
 
 		// actionbar instellen
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setSubtitle("BC Info - Uitval");
+		actionbar.setSubtitle("Uitval");
+		actionbar.setTitle("BC Info");
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// currentLevel uit de SharedPreferences halen
 		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0);
 		setLevel(settings.getInt("currentLevel", 0));
-		
+
 		// indien eerste keer gestart, help tekst weergeven
-		if(settings.getBoolean("firstRun", true)) {
+		if (settings.getBoolean("firstRun", true)) {
 			TextView firstRunTextView = (TextView) findViewById(R.id.textView_firstrun);
 			firstRunTextView.setVisibility(View.VISIBLE);
 		}
@@ -132,9 +133,8 @@ public class ActivityMain extends SlidingActivity implements
 	public void setLevel(int level) {
 		currentLevel = level;
 		String items[] = getResources().getStringArray(R.array.spinner1);
-		ActionBar ab = getSupportActionBar();
-		ab.setTitle(items[level]);
-
+		TextView tv = (TextView) findViewById(R.id.layout_main_level);
+		tv.setText(items[level]);
 	}
 
 	public int getLevel() {
@@ -177,7 +177,7 @@ public class ActivityMain extends SlidingActivity implements
 		refreshThread.start();
 
 	}
-	
+
 	public class RSSHandler extends DefaultHandler {
 
 		StringBuffer chars = new StringBuffer();
