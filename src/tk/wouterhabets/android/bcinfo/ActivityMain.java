@@ -198,6 +198,7 @@ public class ActivityMain extends SlidingActivity implements
 
 			if (localName.equalsIgnoreCase("title")) {
 				Log.i("RSSHandler", "Title gevonden: " + chars.toString());
+				
 
 			}
 
@@ -208,6 +209,10 @@ public class ActivityMain extends SlidingActivity implements
 
 			if (localName.equalsIgnoreCase("item")) {
 				Log.i("RSSHandler", "Item gevonden.");
+				SQLiteClass dbclass = new SQLiteClass(this);
+				dbclass.open();
+				dbclass.createEntry(titlestring, descriptionstring);
+				dbclass.close();
 			}
 
 		}
