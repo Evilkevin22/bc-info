@@ -8,17 +8,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,14 @@ public class ActivityMain extends SlidingActivity implements
 
 	private int currentLevel;
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
+	private final static String netWebURL = "http://www.bernardinuscollege.nl/rss/";
+
+	private WebView webview;
+	private TextView levelTitle, levelDescription, firstRunTextView;
+	private ActionBar actionbar;
+	private SharedPreferences settings;
+	private SharedPreferences.Editor editor;
+	private SlidingMenu slidingMenu;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,36 +55,43 @@ public class ActivityMain extends SlidingActivity implements
 		setContentView(R.layout.activity_main);
 		setBehindContentView(R.layout.activityslider_main);
 
+		// overige view shit instellen
+		webview = (WebView) findViewById(R.id.webview1);
+		levelTitle = (TextView) findViewById(R.id.layout_main_level);
+		levelDescription = (TextView) findViewById(R.id.layout_main_text);
+
 		// actionbar instellen
-		ActionBar actionbar = getSupportActionBar();
+		actionbar = getSupportActionBar();
 		actionbar.setSubtitle("Uitval");
 		actionbar.setTitle("BC Info");
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// currentLevel uit de SharedPreferences halen
-		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0);
+		settings = getSharedPreferences(PREFERENCES_NAME, 0);
 		setLevel(settings.getInt("currentLevel", 0));
+		refresh(getLevel());
 
 		// indien eerste keer gestart, help tekst weergeven
 		if (settings.getBoolean("firstRun", true)) {
-			TextView firstRunTextView = (TextView) findViewById(R.id.textView_firstrun);
+			firstRunTextView = (TextView) findViewById(R.id.textView_firstrun);
 			firstRunTextView.setVisibility(View.VISIBLE);
 		}
 
 		// slidingmenu instellen
-		SlidingMenu menu = getSlidingMenu();
-		menu.setMode(SlidingMenu.LEFT);
-		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		menu.setShadowWidthRes(R.dimen.shadow_width);
-		menu.setShadowDrawable(R.drawable.schaduw);
-		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		menu.setFadeDegree(0.35f);
+		slidingMenu = getSlidingMenu();
+		slidingMenu.setMode(SlidingMenu.LEFT);
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+		slidingMenu.setShadowDrawable(R.drawable.schaduw);
+		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		slidingMenu.setFadeDegree(0.35f);
 		ListView lv = (ListView) findViewById(R.id.listView1);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, android.R.id.text1,
 				getResources().getStringArray(R.array.spinner1));
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
+
 	}
 
 	@Override
@@ -87,11 +103,20 @@ public class ActivityMain extends SlidingActivity implements
 	}
 
 	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
+			webview.goBack();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+
+	}
+
+	@Override
 	protected void onStop() {
 		// currentLevel opslaan in SharedPreferences
 		// en dat de app al een keer is gestart
-		SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
+		editor = settings.edit();
 		editor.putInt("currentLevel", getLevel());
 		editor.putBoolean("firstRun", false);
 		editor.commit();
@@ -143,79 +168,52 @@ public class ActivityMain extends SlidingActivity implements
 
 	private void refresh(int level) {
 
-		// refresh thread, zorgt voor het ophalen van de uitval
-		Thread refreshThread = new Thread() {
-			public void run() {
-				try {
-					URL url1 = new URL("http://wouterhabets.tk/bcinfo.xml");
-					Log.i("ActivityMain",
-							"RSS feed downloaden van http://wouterhabets.tk/bcinfo.xml...");
+		if (level == 0) {
+			webview.loadUrl(netWebURL);
+			webview.setWebViewClient(new WebViewClient());
+			webview.setVisibility(View.VISIBLE);
 
-					InputSource ic = new InputSource(url1.openStream());
-					SAXParserFactory spf = SAXParserFactory.newInstance();
-					SAXParser sp;
-					sp = spf.newSAXParser();
-					XMLReader xr;
-					xr = sp.getXMLReader();
-					xr.setContentHandler(new RSSHandler());
+			levelTitle
+					.setText(getResources().getStringArray(R.array.spinner1)[level]);
+			levelDescription.setVisibility(View.GONE);
+		} else {
+			webview.setVisibility(View.GONE);
+			levelTitle
+					.setText(getResources().getStringArray(R.array.spinner1)[level]);
+			levelDescription.setVisibility(View.VISIBLE);
 
-					Log.i("ActivityMain", "XMLReader starten...");
-					xr.parse(ic);
+			// refresh thread, zorgt voor het ophalen van de uitval
+			Thread refreshThread = new Thread() {
+				public void run() {
+					try {
+						URL url1 = new URL("http://wouterhabets.tk/bcinfo.xml");
+						Log.i("ActivityMain",
+								"RSS feed downloaden van http://wouterhabets.tk/bcinfo.xml...");
 
-				} catch (ParserConfigurationException e) {
-					e.printStackTrace();
-				} catch (SAXException e) {
-					e.printStackTrace();
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+						InputSource ic = new InputSource(url1.openStream());
+						SAXParserFactory spf = SAXParserFactory.newInstance();
+						SAXParser sp;
+						sp = spf.newSAXParser();
+						XMLReader xr;
+						xr = sp.getXMLReader();
+						xr.setContentHandler(new RSSHandler());
+
+						Log.i("ActivityMain", "XMLReader starten...");
+						xr.parse(ic);
+
+					} catch (ParserConfigurationException e) {
+						e.printStackTrace();
+					} catch (SAXException e) {
+						e.printStackTrace();
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
 				}
-
-			}
-		};
-		refreshThread.start();
-
-	}
-
-	public class RSSHandler extends DefaultHandler {
-
-		StringBuffer chars = new StringBuffer();
-
-		@Override
-		public void startElement(String uri, String localName, String qName,
-				Attributes atts) {
-
-			chars = new StringBuffer();
-			if (localName.equalsIgnoreCase("item")) {
-
-			}
+			};
+			refreshThread.start();
 		}
-
-		@Override
-		public void endElement(String uri, String localName, String qName)
-				throws SAXException {
-
-			if (localName.equalsIgnoreCase("title")) {
-				Log.i("RSSHandler", "Title gevonden: " + chars.toString());
-
-			}
-
-			if (localName.equalsIgnoreCase("description")) {
-				Log.i("RSSHandler", "Description gevonden: " + chars.toString());
-
-			}
-
-			if (localName.equalsIgnoreCase("item")) {
-				Log.i("RSSHandler", "Item gevonden.");
-			}
-
-		}
-
-		@Override
-		public void characters(char ch[], int start, int length) {
-			chars.append(new String(ch, start, length));
-		}
-
 	}
 }
