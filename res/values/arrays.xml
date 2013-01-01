@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinner1">
+        <item >Uitval website</item>
         <item >Alle meldingen</item>
         <item >Havo 2</item>
         <item >Havo 3</item>
