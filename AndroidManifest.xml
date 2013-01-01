@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tk.wouterhabets.android.bcinfo"
-    android:versionCode="01"
+    android:versionCode="1"
     android:versionName="0.1" >
 
     <uses-sdk
