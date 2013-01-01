@@ -1,5 +1,6 @@
 package tk.wouterhabets.android.bcinfo;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -31,6 +32,13 @@ public class SQLiteClass {
 	public SQLiteClass close() {
 		dbhelper.close();
 		return null;
+	}
+	
+	public long createEntry(String title, String description) {
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_TITLE, title);
+		cv.put(KEY_DESCRIPTION, description);
+		return database.insert(DATABASE_TABLE, null, cv);
 	}
 
 	private class DBHelper extends SQLiteOpenHelper {
