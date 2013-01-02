@@ -24,5 +24,6 @@
     <string name="sliderlayout_main_title">BC Info</string>
     <string name="sliderlayout_main_uitval">Uitval</string>
     <string name="firstruntext">Swipe van links naar rechts voor de filter.</string>
-
+	<string name="netxml">http://wouterhabets.tk/bcinfo.xml</string>
+    <string name="netweb">http://www.bernardinuscollege.nl/rss</string>
 </resources>

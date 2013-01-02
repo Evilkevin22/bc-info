@@ -1,8 +1,8 @@
 package tk.wouterhabets.android.bcinfo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -12,6 +12,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class ActivityMain extends SlidingActivity implements
 
 	private int currentLevel;
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
-	private final static String netWebURL = "http://www.bernardinuscollege.nl/rss/";
+	private String netWebURL;
 
 	private WebView webview;
 	private TextView levelTitle, levelDescription, firstRunTextView;
@@ -59,6 +60,7 @@ public class ActivityMain extends SlidingActivity implements
 		webview = (WebView) findViewById(R.id.webview1);
 		levelTitle = (TextView) findViewById(R.id.layout_main_level);
 		levelDescription = (TextView) findViewById(R.id.layout_main_text);
+		netWebURL = getResources().getString(R.string.netweb);
 
 		// actionbar instellen
 		actionbar = getSupportActionBar();
@@ -181,39 +183,57 @@ public class ActivityMain extends SlidingActivity implements
 			levelTitle
 					.setText(getResources().getStringArray(R.array.spinner1)[level]);
 			levelDescription.setVisibility(View.VISIBLE);
-
-			// refresh thread, zorgt voor het ophalen van de uitval
-			Thread refreshThread = new Thread() {
-				public void run() {
-					try {
-						URL url1 = new URL("http://wouterhabets.tk/bcinfo.xml");
-						Log.i("ActivityMain",
-								"RSS feed downloaden van http://wouterhabets.tk/bcinfo.xml...");
-
-						InputSource ic = new InputSource(url1.openStream());
-						SAXParserFactory spf = SAXParserFactory.newInstance();
-						SAXParser sp;
-						sp = spf.newSAXParser();
-						XMLReader xr;
-						xr = sp.getXMLReader();
-						xr.setContentHandler(new RSSHandler());
-
-						Log.i("ActivityMain", "XMLReader starten...");
-						xr.parse(ic);
-
-					} catch (ParserConfigurationException e) {
-						e.printStackTrace();
-					} catch (SAXException e) {
-						e.printStackTrace();
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-				}
-			};
-			refreshThread.start();
 		}
+
+		Log.i("RefreshMethod", "Thread maken");
+		// refresh thread, zorgt voor het ophalen van de uitval
+		Thread refreshThread = new Thread() {
+			public void run() {
+				try {
+					Log.i("BCInfo thread", "Uitval downloader instellen");
+					UitvalDownload downloader = new UitvalDownload(
+							openFileOutput("uitvalxml", Context.MODE_PRIVATE));
+					downloader.getUitval();
+					downloader.close();
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+					Log.e("BCInfo thread", "Geen betand gevonden");
+				}
+
+				File file = getBaseContext().getFileStreamPath("uitvalxml");
+				if (file.exists()) {
+					Log.i("BC file", "betand bestaat");
+				} else {
+					Log.i("BC file", "betand bestaat niet");
+				}
+
+				// xml reader
+
+				try {
+					InputSource ic;
+					ic = new InputSource(openFileInput("uitvalxml"));
+					SAXParserFactory spf = SAXParserFactory.newInstance();
+					SAXParser sp;
+					sp = spf.newSAXParser();
+					XMLReader xr;
+					xr = sp.getXMLReader();
+					xr.setContentHandler(new RSSHandler());
+
+					Log.i("BCInfo thread", "XMLReader starten...");
+					xr.parse(ic);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				} catch (SAXException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+		};
+		refreshThread.start();
+
 	}
 }
