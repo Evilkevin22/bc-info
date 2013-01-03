@@ -7,6 +7,10 @@
         android:title="@string/menu_main_refresh" android:icon="@drawable/ic_action_icon1">
     </item>
     <item
+        android:id="@+id/menu_main_download_item"
+        android:title="@string/menu_main_download" >
+    </item>
+    <item
         android:id="@+id/menu_main_settings_item"
         android:title="@string/menu_main_settings">
     </item>

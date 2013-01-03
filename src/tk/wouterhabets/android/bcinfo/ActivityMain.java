@@ -1,9 +1,7 @@
 package tk.wouterhabets.android.bcinfo;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -13,7 +11,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -40,8 +37,9 @@ public class ActivityMain extends SlidingActivity implements
 
 	private int currentLevel;
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
-	private final static String FILE_XML = "uitvalxml";
-	private final static String FILE_DATA = "uitvaldata";
+	// private final static String FILE_XML = "uitvalxml";
+	// private final static String FILE_DATA = "uitvaldata";
+	private final static String DEBUG_TAG = "BCInfo - ActivityMain";
 	private String netWebURL;
 
 	private WebView webview;
@@ -156,6 +154,10 @@ public class ActivityMain extends SlidingActivity implements
 		case android.R.id.home:
 			toggle();
 			break;
+		case R.id.menu_main_download_item:
+			DownloadThread downloadThread = new DownloadThread(this);
+			downloadThread.run();			
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -188,50 +190,26 @@ public class ActivityMain extends SlidingActivity implements
 			levelDescription.setVisibility(View.VISIBLE);
 		}
 
-		Log.i("RefreshMethod", "Thread maken");
-		// refresh thread, zorgt voor het ophalen van de uitval
-		Thread refreshThread = new Thread() {
-			public void run() {
-				try {
-					Log.i("BCInfo thread", "Uitval downloader instellen");
-					UitvalDownload downloader = new UitvalDownload(
-							openFileOutput(FILE_XML, Context.MODE_PRIVATE),
-							(new OutputStreamWriter(openFileOutput(
-									FILE_DATA, Context.MODE_WORLD_WRITEABLE))));
-					downloader.getUitvalFromServer();
-					downloader.close();
-				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
-					Log.e("BCInfo thread", "Geen betand gevonden");
-				}
-
-				// xml reader
-
-				try {
-					InputSource ic;
-					ic = new InputSource(openFileInput("uitvalxml"));
-					SAXParserFactory spf = SAXParserFactory.newInstance();
-					SAXParser sp;
-					sp = spf.newSAXParser();
-					XMLReader xr;
-					xr = sp.getXMLReader();
-					xr.setContentHandler(new RSSHandler());
-
-					Log.i("BCInfo thread", "XMLReader starten...");
-					xr.parse(ic);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (ParserConfigurationException e) {
-					e.printStackTrace();
-				} catch (SAXException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			}
-		};
-		refreshThread.start();
-
+		try {
+			InputSource ic;
+			ic = new InputSource(openFileInput("uitvalxml"));
+			SAXParserFactory spf = SAXParserFactory.newInstance();
+			SAXParser sp;
+			sp = spf.newSAXParser();
+			XMLReader xr;
+			xr = sp.getXMLReader();
+			xr.setContentHandler(new RSSHandler());
+			xr.parse(ic);
+		} catch (FileNotFoundException e) {
+			Log.e(DEBUG_TAG, "Refresh - FileNotFoundException");
+		} catch (ParserConfigurationException e) {
+			Log.e(DEBUG_TAG, "Refresh - ParserConfigurationException");
+		} catch (SAXException e) {
+			Log.e(DEBUG_TAG, "Refresh - SAXException");
+		} catch (IOException e) {
+			Log.e(DEBUG_TAG, "Refresh - IOException");
+			// e.printStackTrace();
+		}
+		
 	}
 }
