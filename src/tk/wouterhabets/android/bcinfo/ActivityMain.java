@@ -3,6 +3,7 @@ package tk.wouterhabets.android.bcinfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -39,6 +40,8 @@ public class ActivityMain extends SlidingActivity implements
 
 	private int currentLevel;
 	private final static String PREFERENCES_NAME = "mSharedPreferences";
+	private final static String FILE_XML = "uitvalxml";
+	private final static String FILE_DATA = "uitvaldata";
 	private String netWebURL;
 
 	private WebView webview;
@@ -192,19 +195,14 @@ public class ActivityMain extends SlidingActivity implements
 				try {
 					Log.i("BCInfo thread", "Uitval downloader instellen");
 					UitvalDownload downloader = new UitvalDownload(
-							openFileOutput("uitvalxml", Context.MODE_PRIVATE));
-					downloader.getUitval();
+							openFileOutput(FILE_XML, Context.MODE_PRIVATE),
+							(new OutputStreamWriter(openFileOutput(
+									FILE_DATA, Context.MODE_WORLD_WRITEABLE))));
+					downloader.getUitvalFromServer();
 					downloader.close();
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 					Log.e("BCInfo thread", "Geen betand gevonden");
-				}
-
-				File file = getBaseContext().getFileStreamPath("uitvalxml");
-				if (file.exists()) {
-					Log.i("BC file", "betand bestaat");
-				} else {
-					Log.i("BC file", "betand bestaat niet");
 				}
 
 				// xml reader
